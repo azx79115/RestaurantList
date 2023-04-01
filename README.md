@@ -12,12 +12,15 @@
 1. 請先確認有安裝node.js 與 npm
 2. 將專案clone到本地
 3. 開啟終端機(Terminal)，進入存放此專案的資料夾
-
 ```
 cd restaurant_list
 ```
+4. 安裝所需套件
+```
+npm i express@4.16.4 express-handlebars@3.0.0
+```
+5. 安裝mongoose
 
-4.安裝所需套件
 
 ##Environment SetUp 環境建置與需求
 - Node.js
