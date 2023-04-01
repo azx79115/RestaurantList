@@ -20,6 +20,23 @@ cd restaurant_list
 npm i express@4.16.4 express-handlebars@3.0.0
 ```
 5. 安裝mongoose
+```
+npm i mongoose@5.9.7
+```
+6. 安裝nodemon(如果已安裝可以跳過此步驟)
+```
+npm i -g nodemon
+```
+7. 匯入種子檔案
+8. 啟動伺服器，執行app.js檔案
+```
+npm run dev
+```
+9.當terminal出現以下字樣表示伺服器已啟動
+```
+Express is listening on localhost:3000
+mongodb connected!
+```
 
 
 ##Environment SetUp 環境建置與需求
