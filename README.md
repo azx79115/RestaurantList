@@ -40,5 +40,12 @@ mongodb connected!
 
 
 ##Environment SetUp 環境建置與需求
-- Node.js
-- Express
+- Node.js 14.16.0
+- Express 4.16.4
+- Express-Handlebars 3.0.0
+- Bootstrap
+- Font-awesome
+- MongoDB
+- mongoose 5.9.7
+- body-parser 1.20.2
+- dotenv 16.0.3
