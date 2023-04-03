@@ -2,17 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/Restaurant')
 
-//設定搜尋路由
-router.get('/search', (req, res) => {
-  const Keyword = req.query.keywords.trim().toLowerCase()
-  Restaurant.find({})
-    .lean()
-    .then(lists => {
-      const searchRestaurant = lists.filter(data => data.name.toLowerCase().includes(Keyword) || data.category.includes(Keyword))
-      res.render('index', { lists: searchRestaurant, wordValue: req.query.keywords })
-    })
-    .catch(err => console.log(err))
-})
+
 
 
 //新增餐廳介面

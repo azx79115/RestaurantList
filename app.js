@@ -5,8 +5,7 @@ const app = express()
 const exphbs = require('express-handlebars')
 //載入restaurant model
 const Restaurant = require('./models/Restaurant')
-// 載入 mongoose
-const mongoose = require('mongoose') 
+ 
 //載入body-parser
 const bodyParser = require('body-parser')
 
@@ -14,29 +13,8 @@ const methodOvrride = require('method-override')
 //引用路由器
 const routes = require('./routes')
 
-// 加入這段 code, 僅在非正式環境時, 使用 dotenv
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+require('./config/mongoose')
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
-
-
-
-const db = mongoose.connection
-// 連線異常
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-// 連線成功
-db.once('open', () => {
-  console.log('mongodb connected!')
-})
-
-
-
-
-// const restaurantData = require('./restaurant.json').results
 
 //載入handlebars樣板引擎
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
