@@ -23,7 +23,10 @@ router.get('/search', (req, res) => {
   Restaurant.find({})
     .lean()
     .then(lists => {
-      const searchRestaurant = lists.filter(data => data.name.toLowerCase().includes(Keyword) || data.category.includes(Keyword))
+      const searchRestaurant = lists.filter(
+        data => 
+          data.name.toLowerCase().includes(Keyword) || 
+          data.category.includes(Keyword))
       res.render('index', { lists: searchRestaurant, keywords })
     })
     .catch(err => console.log(err))

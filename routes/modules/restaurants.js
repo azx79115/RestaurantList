@@ -2,9 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/Restaurant')
 
-
-
-
 //新增餐廳介面
 router.get('/new', (req, res) => {
   res.render('new')
