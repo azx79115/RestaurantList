@@ -11,9 +11,11 @@ router.get('/login', (req, res) => {
 })
 
 //確認使用者登入
-router.post('login', (req, res) => {
-  
-})
+router.post('/login', passport.authenticate('local', {
+  successRedirect:'/',
+  failureRedirect:'/user/login',
+  failureFlash: true, //使用Passport的failureMessage
+}))
 
 //註冊頁面
 router.get('/register', (req, res) => {
@@ -66,6 +68,13 @@ router.post('/register', (req, res) => {
       .then(() => res.redirect('/'))
       .catch(err => console.log(err))
   })
+})
+
+//設定登出路由
+router.get('/logout', (req, res) => {
+  req.logout()
+  req.flash('success_msg', '你已經成功登出')
+  res.redirect('/users/login')
 })
 
 module.exports = router

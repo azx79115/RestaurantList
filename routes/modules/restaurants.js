@@ -9,8 +9,13 @@ router.get('/new', (req, res) => {
 
 //接受新增的資料
 router.post('/', (req, res) => {
-  Restaurant.create(req.body)//存入資料庫
-    .then(() => res.redirect('/'))//新增完成後導回首頁
+  const restaurantData = req.body
+  const userId = req.user._id
+  Restaurant.create({ ...restaurantData, userId })//存入資料庫
+    .then(restaurant => {
+      const id = restaurant._id
+      res.redirect(`/restaurants/${id}`)
+    })
     .catch(error => console.log(error))
 })
 
