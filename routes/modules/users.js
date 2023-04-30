@@ -17,6 +17,9 @@ router.post('/login', passport.authenticate('local', {
   failureFlash: true, //使用Passport的failureMessage
 }))
 
+
+
+
 //註冊頁面
 router.get('/register', (req, res) => {
   res.render('register')
