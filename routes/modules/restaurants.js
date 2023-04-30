@@ -21,8 +21,9 @@ router.post('/', (req, res) => {
 
 //瀏覽特定資料
 router.get('/:id', (req, res) => {
-  const id = req.params.id
-  Restaurant.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  Restaurant.findOne({ _id, userId })//使用findOne必須以mongoDB相同的_id去查詢
     .lean()
     .then((restaurantData) => res.render('show', { restaurantData }))
     .catch(err => console.log(err))
@@ -30,26 +31,27 @@ router.get('/:id', (req, res) => {
 
 //編輯資料
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  const name = req.body.name
-  Restaurant.findById(id)
+  const _id = req.params.id
+  const userId = req.user._id
+  Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurantData) => res.render('edit', { restaurantData }))
     .catch(error => console.log(error))
 })
-//儲存資料
+//儲存編輯資料
 router.put('/:id', (req, res) => {
-  const id = req.params.id
+  const userId = req.user._id
+  const _id = req.params.id
   const editData = req.body
-  Restaurant.findByIdAndUpdate(id, editData)
-    .then(() => res.redirect(`/restaurants/${id}`))
+  Restaurant.findByIdAndUpdate({ _id, userId}, editData)
+    .then(() => res.redirect(`/restaurants/${_id}`))
     .catch(error => console.log(error))
 })
 //刪除資料
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  Restaurant.findById(id)
-    .then(list => list.remove())
+  const _id = req.params.id
+  const userId = req.user.id
+  Restaurant.findByIdAndDelete({ _id, userId})
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })

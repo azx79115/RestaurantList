@@ -12,7 +12,7 @@
           </div>
 
           <div class="input-group">
-            <select class="form-select" id="sort" name="sort">
+            <select class="form-select" id="sortSelect" name="sort">
               <option>A > Z</option>
               <option>Z > A</option>
               <option>類別</option>
@@ -24,6 +24,35 @@
     </div>
   </div>
 </div>
+{{!-- 排列功能 --}}
+<script>
+  $(document).ready(function () {
+    $('#sortSelect').on('change', function () {
+      const sortMethod = $(this).val();
+      const restaurantList = $('.row-cols-sm-3').children().get();
+
+      restaurantList.sort((a, b) => {
+        const aData = $(a).find('.card-title').text().trim().toLowerCase();
+        const bData = $(b).find('.card-title').text().trim().toLowerCase();
+
+        switch (sortMethod) {
+          case 'A > Z':
+            return aData.localeCompare(bData);
+          case 'Z > A':
+            return bData.localeCompare(aData);
+          case '類別':
+            return $(a).find('.restaurant-category').text().localeCompare($(b).find('.restaurant-category').text());
+          case '地區':
+            return $(a).find('.restaurant-location').text().localeCompare($(b).find('.restaurant-location').text());
+          default:
+            return 0;
+        }
+      });
+
+      $('.row-cols-sm-3').append(restaurantList);
+    });
+  });
+</script>
 
 <!-- restaurant list -->
 <div class="container mt-5">

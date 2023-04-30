@@ -16,19 +16,18 @@ router.get('/', (req, res) => {
 
 //設定搜尋路由
 router.get('/search', (req, res) => {
-  // if(!req.query.keywords) {
-  //   res.redirect('/')
-  // }
-
+  if (!req.query.keywords) {
+    return res.redirect('/')
+  }
+  const userId = req.user._id
   const keywords = req.query.keywords
   const Keyword = req.query.keywords.trim().toLowerCase()
-  Restaurant.find({})
+  Restaurant.find({ userId })
     .lean()
     .then(lists => {
       const searchRestaurant = lists.filter(
         data => 
-          data.name.toLowerCase().includes(Keyword) || 
-          data.category.includes(Keyword))
+          data.name.toLowerCase().includes(Keyword) || data.name_en.toLowerCase().includes(Keyword) || data.category.includes(Keyword))
       res.render('index', { lists: searchRestaurant, keywords })
     })
     .catch(err => console.log(err))
